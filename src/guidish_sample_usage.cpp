@@ -1,3 +1,36 @@
+/*
+    GUIDISH - a 128bit guid like id that can be used as a monotonically increasing key
+    64bits - epoch time in microseconds + 16 bits - siteid + 48 bits - cpu tick count
+    useful for implementing message queues and similar id schemes.
+
+    the site id field helps differentiate guidish keys generated in upto 65535 different sites
+    per machine, per micro-second 2^48 - 1 unique keys can be generated on a single site
+
+    the monotonical z-ordering is valid for the same site
+    guidish(site, t1) > guidish(site, t2) if (t1 > t2)
+
+    For x86/64 the tick count is obtained from the intrinsic __rtds()
+    Optionally, std::chrono::high_resolution_clock can be used by defining GUIDISH_USE_CHRONO_FOR_TICKS
+
+    ----------------------------------------------------------------
+    Github: https://github.com/mohaps/guidish/
+    Author: mohaps AT gmail DOT com
+    ----------------------------------------------------------------
+
+    Copyright 2023 Saurav Mohapatra (mohaps@gmail.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ */
 #include "guidish/guidish.h"
 #include <unordered_set>
 using namespace guidish;
