@@ -12,7 +12,9 @@
     For x86/64 the tick count is obtained from the intrinsic __rtds()
     Optionally, std::chrono::high_resolution_clock can be used by defining GUIDISH_USE_CHRONO_FOR_TICKS
 
-    License: APACHE 2.0 - http://www.apache.org/licenses/LICENSE-2.0
+    ----------------------------------------------------------------
+    Github: https://github.com/mohaps/guidish/
+    Author: mohaps AT gmail DOT com
     ----------------------------------------------------------------
 
     Copyright 2023 Saurav Mohapatra (mohaps@gmail.com)
@@ -56,9 +58,10 @@ namespace clock {
         static uint64_t kStart = __rdtsc();
         return __rdtsc() - kStart;
 #else
-        static auto kStart = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now());
-        auto cur = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now());
-        return static_cast<uint64_t>(cur - kStart);
+        static auto kStart = std::chrono::high_resolution_clock::now();
+        auto cur = std::chrono::high_resolution_clock::now();
+        auto delta = std::chrono::duration_cast<std::chrono::nanoseconds>(cur - kStart).count();
+        return static_cast<uint64_t>(delta);
 #endif
     }
 }
