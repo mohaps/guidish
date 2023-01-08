@@ -51,5 +51,5 @@ progress: done [1000000] ids in 77606 usecs => 0005f1b51e5c-266a-abcd-0000-0de31
 success: generated 1000000 monotonically increasing ids without collision in 77616 usecs!
 ```
 ## Credits
-Author: Saurav Mohapatra (mohaps AT gmail DOT com)
-License: APACHE 2.0 - http://www.apache.org/licenses/LICENSE-2.0
+* Author: Saurav Mohapatra (mohaps AT gmail DOT com)
+* License: APACHE 2.0 - http://www.apache.org/licenses/LICENSE-2.0
